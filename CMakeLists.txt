@@ -38,6 +38,7 @@ message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
 add_subdirectory(libjson-7.6.1)
 add_subdirectory(tinyxml2-2.1.0)
 add_subdirectory(lua-5.2.3)
+add_subdirectory(stb_image-2.16)
 
 if (NOT APPLE)
     add_subdirectory(openal-1.16.0)
