@@ -61,6 +61,7 @@ add_subdirectory(vorbis-1.3.4)
 
 add_subdirectory(bullet-2.82-r2704)
 add_subdirectory(base64-1.0.0)
+add_subdirectory(SDL2-2.0.7)
 
 set(BUILD_TARGETS
     BulletDynamics
@@ -76,6 +77,7 @@ set(BUILD_TARGETS
     tinyxml2static
     json
     base64
+    SDL2-static
 )
 
 if (NOT APPLE)
@@ -93,6 +95,35 @@ IF(BUILD_EXTRA_LIBS)
     endif(NOT WIN32)
 ENDIF(BUILD_EXTRA_LIBS)
 
+
+###################################################################
+# bgfx build
+###################################################################
+if(WIN32)
+    set(BGFX_DEPS bgfxDebug.lib)
+else(WIN32)
+    set(BGFX_DEPS libbgfxDebug.a)
+endif(WIN32)
+
+if(LINUX OR ANDROID)
+    add_custom_command(
+        OUTPUT ${BGFX_DEPS}
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/bgfxBuilder/build-linux.sh ${CMAKE_CURRENT_SOURCE_DIR}/bgfxBuilder ${LIBRARY_OUTPUT_PATH}
+    )
+endif(LINUX OR ANDROID)
+
+add_custom_target(bgfx-deps ALL DEPENDS ${BGFX_DEPS})
+
+# bgfx install includes
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bx/include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bimg/include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bgfx/include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/bgfx/tools/shaderc/shaderc.h DESTINATION include/bgfx/tools/shaderc/shaderc.h)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/bgfx/src/vertexdecl.h DESTINATION include/bgfx/src/vertexdecl.h)
+
+###################################################################
+
+# amalgamate all libs
 if(WIN32)
     set(GAMEPLAY_DEPS gameplay-deps.lib)
 else(WIN32)
@@ -117,7 +148,7 @@ else()
     )
 endif(LINUX OR ANDROID)
 
-add_custom_target(gameplay-deps ALL DEPENDS ${GAMEPLAY_DEPS})
+add_custom_target(gameplay-deps ALL DEPENDS ${BGFX_DEPS} ${GAMEPLAY_DEPS})
 add_dependencies(gameplay-deps ${BUILD_TARGETS})
 
 SET_DIRECTORY_PROPERTIES(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${LIBRARY_OUTPUT_PATH}/${GAMEPLAY_DEPS})
