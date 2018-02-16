@@ -115,11 +115,11 @@ endif(LINUX OR ANDROID)
 add_custom_target(bgfx-deps ALL DEPENDS ${BGFX_DEPS})
 
 # bgfx install includes
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bx/include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bx/include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h" PATTERN "*.inl")
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bimg/include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bgfx/include/ DESTINATION include/ FILES_MATCHING PATTERN "*.h")
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/bgfx/tools/shaderc/shaderc.h DESTINATION include/bgfx/tools/shaderc/shaderc.h)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/bgfx/src/vertexdecl.h DESTINATION include/bgfx/src/vertexdecl.h)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/bgfx/tools/shaderc/shaderc.h DESTINATION include/bgfx/tools/shaderc/)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/bgfx/src/vertexdecl.h DESTINATION include/bgfx/src/)
 
 ###################################################################
 
