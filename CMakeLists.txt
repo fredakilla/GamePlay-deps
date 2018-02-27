@@ -61,6 +61,7 @@ add_subdirectory(vorbis-1.3.4)
 
 add_subdirectory(bullet-2.82-r2704)
 add_subdirectory(base64-1.0.0)
+add_subdirectory(SDL2-2.0.7)
 
 set(BUILD_TARGETS
     BulletDynamics
@@ -76,6 +77,7 @@ set(BUILD_TARGETS
     tinyxml2static
     json
     base64
+    SDL2-static
 )
 
 if (NOT APPLE)
