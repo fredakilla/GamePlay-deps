@@ -19,6 +19,11 @@ cross-compiling.
 |          |                             | x86
 | Windows  | windows                     | x86_64
 
+# Checkout
+
+```
+git submodule update --init --recursive
+```
 
 # Compiling (Host and Target are the same)
 
