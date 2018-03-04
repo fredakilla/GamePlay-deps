@@ -63,6 +63,8 @@ both the Debug and Release variants.
 > cmake -G "Visual Studio 14 Win64" ..
 > msbuild GamePlay-deps.sln /property:Configuration=Debug
 > msbuild GamePlay-deps.sln /property:Configuration=Release
+or
+> cmake --build . --target install --config Debug
 ```
 
 # Cross-Compiling (Host and Target are different)
