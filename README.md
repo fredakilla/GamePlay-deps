@@ -57,7 +57,7 @@ $ cd GamePlay-deps
 $ mkdir build
 $ cd build
 $ cmake ..
-$ make install
+$ make -j12 (X number should be 1.5x the number of cores you have)
 ```
 
 ## MacOS setup
@@ -71,7 +71,7 @@ $ cd GamePlay-deps
 $ mkdir build
 $ cd build
 $ cmake ..
-$ make install
+$ make -j12 (X number should be 1.5x the number of cores you have)
 ```
 
 # Cross-Compiling (Host and Target are different)
