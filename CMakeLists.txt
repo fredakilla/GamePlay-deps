@@ -35,6 +35,20 @@ ENDIF(NOT WIN32)
 file(MAKE_DIRECTORY ${LIBRARY_OUTPUT_PATH})
 message(STATUS "Directory: ${LIBRARY_OUTPUT_PATH}")
 
+
+# bgfx options
+set( BGFX_BUILD_TOOLS OFF CACHE BOOL "Build bgfx tools." FORCE )
+set( BGFX_BUILD_EXAMPLES OFF CACHE BOOL "Build bgfx examples." FORCE )
+set( BGFX_INSTALL OFF CACHE BOOL "Create installation target." FORCE )
+set( BGFX_INSTALL_EXAMPLES OFF CACHE BOOL "Install examples and their runtimes." FORCE )
+set( BGFX_CUSTOM_TARGETS OFF CACHE BOOL "Include convenience custom targets." FORCE )
+set( BGFX_USE_OVR OFF CACHE BOOL "Build with OVR support." FORCE )
+set( BGFX_AMALGAMATED OFF CACHE BOOL "Amalgamated bgfx build for faster compilation" FORCE )
+set( BX_AMALGAMATED OFF CACHE BOOL "Amalgamated bx build for faster compilation" FORCE )
+set( BGFX_CONFIG_DEBUG ON CACHE BOOL "Enables debug configuration on all builds" FORCE )
+set( BGFX_USE_DEBUG_SUFFIX OFF CACHE BOOL "Add 'd' suffix to debug output targets" FORCE )
+
+
 # add subdirectory
 
 if(LINUX)
@@ -68,6 +82,9 @@ set(BUILD_TARGETS
     # png
     zlib
     spark
+    bgfx
+    bimg
+    bx
     brtshaderc
     # lua
     # tinyxml2
