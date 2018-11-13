@@ -87,3 +87,25 @@ add_custom_target(gameplay-deps ALL DEPENDS ${GAMEPLAY_DEPS})
 add_dependencies(gameplay-deps ${BUILD_TARGETS})
 
 SET_DIRECTORY_PROPERTIES(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${LIBRARY_OUTPUT_PATH}/${GAMEPLAY_DEPS})
+
+
+# function to copy include files to output directory
+
+FUNCTION(COPY_HEADERS src dst)
+    file(COPY ${src}
+        DESTINATION ${dst} FILES_MATCHING REGEX "^.*.(h|hpp|inl)$"
+        PATTERN ".svn" EXCLUDE
+        PATTERN "CMakeFiles" EXCLUDE)
+ENDFUNCTION(COPY_HEADERS)
+
+set(OUT_DIR_INCLUDE "${PROJECT_SOURCE_DIR}/out/external-deps/include")
+
+COPY_HEADERS(freetype-2.7.1/include/freetype/ ${OUT_DIR_INCLUDE}/freetype/)
+COPY_HEADERS(freetype-2.7.1/include/ft2build.h ${OUT_DIR_INCLUDE}/)
+COPY_HEADERS(json-7.6.1/ ${OUT_DIR_INCLUDE}/json/)
+COPY_HEADERS(ogg-1.3.2/include/ogg/ ${OUT_DIR_INCLUDE}/ogg/)
+COPY_HEADERS(openal-1.17.2/include/AL/ ${OUT_DIR_INCLUDE}/AL/)
+COPY_HEADERS(sdl-2.0.7/include/ ${OUT_DIR_INCLUDE}/sdl/)
+COPY_HEADERS(vorbis-1.3.5/include/vorbis/ ${OUT_DIR_INCLUDE}/vorbis/)
+COPY_HEADERS(zlib-1.2.8/zlib.h ${OUT_DIR_INCLUDE}/zlib/)
+COPY_HEADERS(png-1.6.15/ ${OUT_DIR_INCLUDE}/png/)
